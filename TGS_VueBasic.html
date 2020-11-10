@@ -34,10 +34,17 @@
                 <ul class="list-group">
                     <div v-for="(ToDos, index) in ToDo" :key="index">
                             <li class="list-group-item">
-                            {{ ToDos.status }}
-                            <br>
-                            {{ ToDos.tugas }}
-                            <br>
+                                <span v-if= "ToDos.status =='Penting'">
+                                    <p class ="text-danger">{{ ToDos.status }}</p>
+                                </span>
+                                <span v-else-if= "ToDos.status =='Biasa'">
+                                    <p class ="text-primary">{{ ToDos.status }}</p>
+                                </span>
+                                <span v-else>
+                                    <p class ="text-success">{{ ToDos.status }}</p>
+                                </span>
+
+                            <h1 class="font-weight-bold">{{ ToDos.tugas }}</h1>
                             {{ ToDos.catatan }}
                             <br>
                             <button class="btn btn-danger" v-on:click="hapus(index)">Hapus</button>
@@ -49,20 +56,20 @@
             <div class="mx-auto" style="width : 1000px">
       
                 <div class="form-group">
-                  <label for="tugas">Tugas</label>
-                  <input type="text" class="form-control" v-model="inputtugas">
+                  <label for="tugas">Apasih Kerjaan Kamu ?</label>
+                  <input type="text" class="form-control" v-model="inputtugas" placeholder="Tugas..">
                 </div>
                 <div class="form-group">
-                  <label for="status">status</label>
-                  <select class="form-control" v-model="inputstatus">
+                  <label for="status">Seberapa Penting sih ?</label>
+                  <select class="form-control" v-model="inputstatus" placeholder="Status..">
                     <option>Penting</option>
                     <option>Biasa</option>
                     <option>Tidak Penting</option>
                   </select>
                 </div>
                 <div class="form-group">
-                    <label for="catatan">Catatan</label>
-                    <textarea class="form-control" v-model="inputcatatan" rows="3"></textarea>
+                    <label for="catatan">Ada Catatan ?</label>
+                    <textarea class="form-control" v-model="inputcatatan" rows="3" placeholder="Catatan..."></textarea>
                 </div>
                 <button class="btn btn-danger" @click="batal" >Batal</button>
                 <button class="btn btn-primary" @click="simpan" >Simpan</button>
